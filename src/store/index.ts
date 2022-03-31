@@ -1,14 +1,10 @@
 import { createStore } from 'vuex'
+import { state, getters, mutations } from '@/store/models/queueModel'
+import { State } from '@/types/State'
 
-export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+export const store = createStore<State>({
+  state,
+  getters,
+  mutations,
+  strict: true
 })

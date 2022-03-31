@@ -1,0 +1,23 @@
+.container_tile {
+    display: flex;
+    justify-content: space-between;
+}
+
+.queuelist__item, .weather {
+    background-color: white;
+    border: white 1px solid;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    box-shadow: 3px 3px 3px rgba($color: #6b6b6b, $alpha: 1.0);
+    padding: 5px;
+}
+
+.queuelist__item {
+    list-style: none;
+}
+
+.weather {
+    min-width: 410px;
+    max-width: 500px;
+}
+

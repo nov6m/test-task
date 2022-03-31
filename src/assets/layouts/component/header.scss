@@ -1,0 +1,32 @@
+.menu {
+
+    &_list {
+        list-style: none;
+        display: flex;
+
+    }
+}
+
+.nav-link {
+    text-decoration: none;
+    padding: 15px;
+    align-items: stretch;
+}
+
+.nav-link:visited {
+    color: $grey;
+}
+
+.active:hover {
+    background-color: $grey1;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.menu-link {
+    align-items: center;
+}

@@ -1,0 +1,9 @@
+.container {
+    margin: 0 auto;
+    @media (max-width: 720px) {
+        width: 700px
+    }
+    @media (min-width: 720px) {
+        width: 1000px;
+    }
+}
