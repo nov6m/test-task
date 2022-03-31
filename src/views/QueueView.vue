@@ -96,7 +96,6 @@ export default defineComponent ({
             getCoordinateAxios();
             getWeatherAxios();
             idIntervalWeather.value = setInterval(function(){
-            getCoordinateAxios();
             getWeatherAxios();
         }, 1000); //по какой то причине апи постоянно первым ответом присылает температуру 300 кельвин, поэтому поставил запрашивать каждую секунду, чтобы правильные данные отобразились
         });
