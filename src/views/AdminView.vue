@@ -5,81 +5,106 @@
                 Список имеющихся талонов: 
             </div>
             <ul class="typelist">
-                <li class="type_item" v-for="(count, name) in typeList" :key="name">
+                <li 
+                    v-for="(count, name) in typeList" 
+                    :key="name"
+                    class="type_item" 
+                >
                     <div class="type_item_info">
                         {{name}}-{{count}}
                     </div>
                     <div class="type_item_control">
                         <button @click="editType(name)">Редактировать талон</button>
-                        <button @click="deleteType(name)" >Удалить талон</button>
+                        <button @click="deleteType(name)">Удалить талон</button>
                     </div>
                 </li>
             </ul>
         </div>
-        <div v-else class="message">
+        <div 
+            v-else 
+            class="message"
+        >
             {{message}}
         </div>
         <div class="control_add_delete">
-            <button @click="showModalAdd = true">Добавить тип талона</button>
+            <button @click="showModal.add = true">Добавить тип талона</button>
             <button @click="store.commit('clearQueue')">Очистить очередь</button>
         </div>
         <div class="weather_control">
             <div>
                 Получать погоду из города:
             </div>
-            <input type="text" placeholder="Например Orenburg..." v-model="inputCity"> <!--апи получает данные с английскими названиями городов-->
-            <button :disabled="inputCityEmpty" @click="setCityLocalStorage(inputCity)">Сохранить</button>
+            <input 
+                type="text" 
+                placeholder="Например Orenburg..." 
+                v-model="inputCity"
+            > 
+            <button 
+                @click="setCityLocalStorage(inputCity)"
+                :disabled="inputCityEmpty" 
+            >Сохранить</button>
         </div>
-        <add-type-window-component v-if="showModalAdd" @close="showModalAdd = false"/>
-        <edit-window-component v-if="showModalEdit" @close="showModalEdit = false"/>
+        <AdminViewAddTypeWindow 
+            v-if="showModal.add" 
+            @close="showModal.add = false"
+        />
+        <AdminViewEditTypeWindow 
+            v-if="showModal.edit" 
+            @close="showModal.edit = false"
+        />
     </div>
 </template>
 
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref, reactive } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '../store/models/queueModel'
-import { updateTypeLocalStorage, setCityLocalStorage } from '../services/updateLocalStorageState'
-import AddTypeWindowComponent from '../components/ModalComponent/AddTypeWindowComponent.vue'
-import EditWindowComponent from '../components/ModalComponent/EditWindowComponent.vue'
+import { updateTypeLocalStorage, setCityLocalStorage, updateQueueLocalStorage } from '../services/updateLocalStorageState'
+import AdminViewAddTypeWindow from '../components/ModalComponent/AdminViewAddTypeWindow.vue'
+import AdminViewEditTypeWindow from '../components/ModalComponent/AdminViewEditTypeWindow.vue'
+import { ShowModal } from '../types/ShowModal'
 
 
 export default defineComponent({
     components: {
-        AddTypeWindowComponent,
-        EditWindowComponent
+        AdminViewAddTypeWindow,
+        AdminViewEditTypeWindow
     },
     setup() {
         const store = useStore(key);
-        const showModalAdd = ref(false);
-        const showModalEdit = ref(false);
-        const message = ref('Талоны отсутствуют');
+        const showModal = reactive<ShowModal>({
+            add: false,
+            edit: false
+        });
+        const message: string = 'Талоны отсутствуют';
         const inputCity = ref('');
 
         const typeList = computed(() => store.getters.TYPELIST);
+        const queueList = computed(() => store.getters.QUEUELIST);
 
         const inputCityEmpty = computed(() => {
             return inputCity.value == '';
         });
 
         const editType = function(type: string): void {
-            showModalEdit.value = true;
+            showModal.edit = true;
             store.commit('setCurrentType',type);
         };
 
         const deleteType = function(type: string): void {
             store.commit('deleteCouponType',type);
+            store.commit('deleteCouponFromQueue',type);
             updateTypeLocalStorage(typeList.value);
+            updateQueueLocalStorage(queueList.value);
         };  
 
 
         return {
+            showModal,
             store,
             typeList,
             message,
-            showModalAdd,
-            showModalEdit,
             inputCity,
             editType,
             deleteType,

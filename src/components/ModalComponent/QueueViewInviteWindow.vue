@@ -15,8 +15,7 @@ import { key } from '../../store/models/queueModel'
 import { updateQueueLocalStorage } from '../../services/updateLocalStorageState'
 
 export default defineComponent({
-    
-    setup(props, { emit }) {
+    setup(_, { emit }) {
         const store = useStore(key);
         
         const queueList = computed(() => store.getters.QUEUELIST);

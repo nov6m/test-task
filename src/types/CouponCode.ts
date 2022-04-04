@@ -1,4 +1,4 @@
-export default interface CouponCode {
+export interface CouponCode {
     type: string,
-    id: number,
+    id: number
 }

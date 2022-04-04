@@ -1,6 +1,4 @@
-interface menuItem {
+export interface menuItem {
     name: string,
     path: string
 }
-
-export default menuItem

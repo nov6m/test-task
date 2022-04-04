@@ -1,6 +1,6 @@
 import { State } from "@/types/State"
-import typeCoupon from "@/types/typeCoupon"
-import userCoupon from "@/types/userCoupon"
+import { typeCoupon } from "@/types/typeCoupon"
+import { userCoupon } from "@/types/userCoupon"
 import { InjectionKey } from "@vue/runtime-core"
 import { Store } from "vuex"
 
@@ -33,12 +33,15 @@ const mutations  = {
     deleteCouponType(state: State, payload: string): void {
         delete state.typeList[payload];
     },
+    deleteCouponFromQueue(state: State, payload: string): void {
+        state.queueList = state.queueList.filter(el => el.couponCode.type !== payload);
+    },
     addCoupon(state: State, payload: userCoupon): void {
         state.queueList.push(payload);
     },
     editCouponTypes(state: State, payload: string):void {//edit
         for(let property in state.typeList) {
-            if(property == state.currentType) {
+            if(property === state.currentType) {
                 state.typeList[payload] = state.typeList[property];
                 delete state.typeList[property];
             }

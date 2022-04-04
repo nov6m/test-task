@@ -5,8 +5,15 @@
                     <div>
                         Редактировать тип талона: 
                     </div>
-                    <input type="text" placeholder="Название типа" v-model="inputType">
-                    <button :disabled="!inputEmpty" @click="changeType">Редактировать тип</button>
+                    <input 
+                        type="text" 
+                        placeholder="Название типа" 
+                        v-model="inputType"
+                    >
+                    <button 
+                        @click="changeType"
+                        :disabled="!inputEmpty" 
+                    >Редактировать тип</button>
                     <button @click="closeModal">Назад</button>
             </div>
         </div>
@@ -20,19 +27,16 @@ import { useStore } from 'vuex'
 
  
 export default defineComponent ({
-    setup(props, { emit }) {
+    setup(_, { emit }) {
         const store = useStore(key);
-
-        const typeList = computed(() => {
-            return store.getters.TYPELIST;
-        });
+        
         const currentType = computed(() => {
             return store.getters.CURRENTTYPE
         });
         const inputType = ref(currentType.value);
 
         const inputEmpty = computed(() => {
-            return inputType.value != '';
+            return inputType.value !== '';
         });
 
         const closeModal = function() {
@@ -40,8 +44,10 @@ export default defineComponent ({
         };
 
         const changeType = function(): void {
-            store.commit('editCouponTypes', inputType.value);
-            store.commit('resetCurrentType');
+            if(currentType.value !== inputType.value) {
+                store.commit('editCouponTypes', inputType.value);
+                store.commit('resetCurrentType');
+            }
             closeModal();
         };
 

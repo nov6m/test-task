@@ -1,5 +1,5 @@
-import CouponCode from './CouponCode'
+import { CouponCode } from './CouponCode'
 
-export default interface userCoupon {
+export interface userCoupon {
     couponCode: CouponCode, time: Date
 }
