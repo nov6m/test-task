@@ -2,13 +2,13 @@
     <div class="container">
         <div v-if="Object.keys(typeList).length">
             <div class="info_description">
-                Список имеющихся талонов: 
+                Список имеющихся талонов:
             </div>
             <ul class="typelist">
-                <li 
-                    v-for="(count, name) in typeList" 
+                <li
+                    v-for="(count, name) in typeList"
                     :key="name"
-                    class="type_item" 
+                    class="type_item"
                 >
                     <div class="type_item_info">
                         {{name}}-{{count}}
@@ -20,8 +20,8 @@
                 </li>
             </ul>
         </div>
-        <div 
-            v-else 
+        <div
+            v-else
             class="message"
         >
             {{message}}
@@ -34,27 +34,26 @@
             <div>
                 Получать погоду из города:
             </div>
-            <input 
-                type="text" 
-                placeholder="Например Orenburg..." 
+            <input
+                type="text"
+                placeholder="Например Orenburg..."
                 v-model="inputCity"
-            > 
-            <button 
+            >
+            <button
                 @click="setCityLocalStorage(inputCity)"
-                :disabled="inputCityEmpty" 
+                :disabled="inputCityEmpty"
             >Сохранить</button>
         </div>
-        <AdminViewAddTypeWindow 
-            v-if="showModal.add" 
+        <AdminViewAddTypeWindow
+            v-if="showModal.add"
             @close="showModal.add = false"
         />
-        <AdminViewEditTypeWindow 
-            v-if="showModal.edit" 
+        <AdminViewEditTypeWindow
+            v-if="showModal.edit"
             @close="showModal.edit = false"
         />
     </div>
 </template>
-
 
 <script lang="ts">
 import { computed, defineComponent, ref, reactive } from 'vue'
@@ -65,52 +64,50 @@ import AdminViewAddTypeWindow from '../components/ModalComponent/AdminViewAddTyp
 import AdminViewEditTypeWindow from '../components/ModalComponent/AdminViewEditTypeWindow.vue'
 import { ShowModal } from '../types/ShowModal'
 
-
 export default defineComponent({
-    components: {
-        AdminViewAddTypeWindow,
-        AdminViewEditTypeWindow
-    },
-    setup() {
-        const store = useStore(key);
-        const showModal = reactive<ShowModal>({
-            add: false,
-            edit: false
-        });
-        const message: string = 'Талоны отсутствуют';
-        const inputCity = ref('');
+  components: {
+    AdminViewAddTypeWindow,
+    AdminViewEditTypeWindow
+  },
+  setup () {
+    const store = useStore(key)
+    const showModal = reactive<ShowModal>({
+      add: false,
+      edit: false
+    })
+    const message = 'Талоны отсутствуют'
+    const inputCity = ref('')
 
-        const typeList = computed(() => store.getters.TYPELIST);
-        const queueList = computed(() => store.getters.QUEUELIST);
+    const typeList = computed(() => store.getters.TYPELIST)
+    const queueList = computed(() => store.getters.QUEUELIST)
 
-        const inputCityEmpty = computed(() => {
-            return inputCity.value == '';
-        });
+    const inputCityEmpty = computed(() => {
+      return inputCity.value === ''
+    })
 
-        const editType = function(type: string): void {
-            showModal.edit = true;
-            store.commit('setCurrentType',type);
-        };
-
-        const deleteType = function(type: string): void {
-            store.commit('deleteCouponType',type);
-            store.commit('deleteCouponFromQueue',type);
-            updateTypeLocalStorage(typeList.value);
-            updateQueueLocalStorage(queueList.value);
-        };  
-
-
-        return {
-            showModal,
-            store,
-            typeList,
-            message,
-            inputCity,
-            editType,
-            deleteType,
-            inputCityEmpty,
-            setCityLocalStorage
-        }
+    const editType = function (type: string): void {
+      showModal.edit = true
+      store.commit('setCurrentType', type)
     }
+
+    const deleteType = function (type: string): void {
+      store.commit('deleteCouponType', type)
+      store.commit('deleteCouponFromQueue', type)
+      updateTypeLocalStorage(typeList.value)
+      updateQueueLocalStorage(queueList.value)
+    }
+
+    return {
+      showModal,
+      store,
+      typeList,
+      message,
+      inputCity,
+      editType,
+      deleteType,
+      inputCityEmpty,
+      setCityLocalStorage
+    }
+  }
 })
 </script>

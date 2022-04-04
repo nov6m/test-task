@@ -1,4 +1,4 @@
-import { CouponCode } from './CouponCode'
+import { CouponCode } from '@/types/CouponCode'
 
 export interface userCoupon {
     couponCode: CouponCode, time: Date
