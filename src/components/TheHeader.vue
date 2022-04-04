@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { menuItem } from '../types/menuItem'
+import { menuItem } from '../types/MenuItem'
 
 export default defineComponent({
     setup() {

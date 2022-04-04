@@ -1,5 +1,5 @@
-import { userCoupon } from "@/types/userCoupon"
-import { KeysLocalStorage } from "@/types/keyLocalStorage"
+import { userCoupon } from "@/types/UserCoupon"
+import { KeysLocalStorage } from "@/types/KeyLocalStorage"
 
 function updateTypeLocalStorage(value: userCoupon):void {
     localStorage.setItem(KeysLocalStorage.couponType, JSON.stringify(value));

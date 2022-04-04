@@ -5,7 +5,7 @@
                 Выбрать тип талона: 
             </div>
             <div class="record_type">
-                <select v-model="selected">
+                <select v-model="selectedType">
                     <option 
                         v-for="(type, name) in typeList" 
                         :key="type" 
@@ -18,7 +18,7 @@
                 >Записаться в очередь</button>
             </div>
             <div>
-                <p v-if="selected !== ''">Количество людей в очереди: {{queueList.length}}</p>
+                <p v-if="selectedType !== ''">Количество людей в очереди: {{queueList.length}}</p>
             </div>
         </div>
         <div v-else class="message">
@@ -30,8 +30,8 @@
 <script lang="ts">
 import { defineComponent, computed, ref} from 'vue'
 import { useStore } from 'vuex'
-import { key } from '../store/models/queueModel'
-import { userCoupon } from '../types/userCoupon'
+import { key } from '../store/models/QueueModel'
+import { userCoupon } from '../types/UserCoupon'
 import { updateQueueLocalStorage, updateTypeLocalStorage } from '../services/updateLocalStorageState'
 import { add } from 'date-fns'
 
@@ -41,32 +41,32 @@ export default defineComponent({
         const typeList = computed(() => store.getters.TYPELIST);
         const queueList = computed(() => store.getters.QUEUELIST);
         const newCoupon = ref<userCoupon>({couponCode: {type: '', id: -1}, time: new Date()});
-        const timeToNextUserInSecond: object = {
+        const timeNextUserInSecond: object = {
             seconds: 30
         };
-        const timeToNextUserInMinute: object = {
+        const timeNextUserInMinute: object = {
             minutes: 5
         };
         
-        const selected = ref('');
+        const selectedType = ref('');
         const message: string = 'На данный момент запись невозможна';
 
         const typeNotSelected = computed(() => {
-            return selected.value === '';
+            return selectedType.value === '';
         });
 
         function addUserToQueue():void {
-            const countType = typeList.value[selected.value];
+            const countType = typeList.value[selectedType.value];
             if (!queueList.value.length) {
-                newCoupon.value = {couponCode: {type: '', id: -1}, time: add(new Date(), timeToNextUserInSecond)};
+                newCoupon.value = {couponCode: {type: '', id: -1}, time: add(new Date(), timeNextUserInSecond)};
                 store.commit('setTime', newCoupon.value.time);
             } else {
-                newCoupon.value = {couponCode: {type: '', id: -1}, time: add(store.getters.TIME, timeToNextUserInMinute)};
+                newCoupon.value = {couponCode: {type: '', id: -1}, time: add(store.getters.TIME, timeNextUserInMinute)};
                 store.commit('setTime', newCoupon.value.time);
             }
-            newCoupon.value.couponCode.type = selected.value;
+            newCoupon.value.couponCode.type = selectedType.value;
             newCoupon.value.couponCode.id = countType;
-            store.commit('incrementTypeId', selected.value);
+            store.commit('incrementTypeId', selectedType.value);
             store.commit('addCoupon', newCoupon.value);
             updateQueueLocalStorage(queueList.value);
             updateTypeLocalStorage(typeList.value);
@@ -74,7 +74,7 @@ export default defineComponent({
 
         return {
             addUserToQueue,
-            selected,
+            selectedType,
             typeList,
             queueList,
             message,

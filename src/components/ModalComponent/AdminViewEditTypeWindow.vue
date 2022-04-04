@@ -12,7 +12,7 @@
                     >
                     <button 
                         @click="changeType"
-                        :disabled="!inputEmpty" 
+                        :disabled="!inputTypeEmpty" 
                     >Редактировать тип</button>
                     <button @click="closeModal">Назад</button>
             </div>
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
-import { key } from '../../store/models/queueModel'
+import { key } from '../../store/models/QueueModel'
 import { useStore } from 'vuex'
 
  
@@ -35,7 +35,7 @@ export default defineComponent ({
         });
         const inputType = ref(currentType.value);
 
-        const inputEmpty = computed(() => {
+        const inputTypeEmpty = computed(() => {
             return inputType.value !== '';
         });
 
@@ -53,7 +53,7 @@ export default defineComponent ({
 
         return {
             inputType,
-            inputEmpty,
+            inputTypeEmpty,
             changeType,
             closeModal
         }

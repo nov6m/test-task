@@ -1,6 +1,6 @@
 import { State } from "@/types/State"
-import { typeCoupon } from "@/types/typeCoupon"
-import { userCoupon } from "@/types/userCoupon"
+import { typeCoupon } from "@/types/TypeCoupon"
+import { userCoupon } from "@/types/UserCoupon"
 import { InjectionKey } from "@vue/runtime-core"
 import { Store } from "vuex"
 

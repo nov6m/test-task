@@ -10,13 +10,13 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
 import TheHeader from './components/TheHeader.vue'
-import { key } from './store/models/queueModel'
+import { key } from './store/models/QueueModel'
 import { useStore } from 'vuex'
-import { typeCoupon } from './types/typeCoupon'
-import { userCoupon } from './types/userCoupon'
+import { typeCoupon } from './types/TypeCoupon'
+import { userCoupon } from './types/UserCoupon'
 import { CouponCode } from './types/CouponCode'
 import { add } from 'date-fns'
-import { KeysLocalStorage } from './types/keyLocalStorage'
+import { KeysLocalStorage } from './types/KeyLocalStorage'
 
 export default defineComponent({
   components: {

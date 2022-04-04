@@ -11,7 +11,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
-import { key } from '../../store/models/queueModel'
+import { key } from '../../store/models/QueueModel'
 import { updateQueueLocalStorage } from '../../services/updateLocalStorageState'
 
 export default defineComponent({

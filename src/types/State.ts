@@ -1,5 +1,5 @@
-import { userCoupon } from "./userCoupon"
-import { typeCoupon } from "./typeCoupon"
+import { userCoupon } from '@/types/UserCoupon'
+import { typeCoupon } from '@/types/TypeCoupon'
 
 export interface State {
     typeList: typeCoupon,

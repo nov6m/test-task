@@ -59,7 +59,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref, reactive } from 'vue'
 import { useStore } from 'vuex'
-import { key } from '../store/models/queueModel'
+import { key } from '../store/models/QueueModel'
 import { updateTypeLocalStorage, setCityLocalStorage, updateQueueLocalStorage } from '../services/updateLocalStorageState'
 import AdminViewAddTypeWindow from '../components/ModalComponent/AdminViewAddTypeWindow.vue'
 import AdminViewEditTypeWindow from '../components/ModalComponent/AdminViewEditTypeWindow.vue'

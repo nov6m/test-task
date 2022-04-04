@@ -45,7 +45,7 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, onUnmounted, reactive, ref } from "@vue/runtime-core" 
 import { useStore } from 'vuex'
-import { key } from '../store/models/queueModel'
+import { key } from '../store/models/QueueModel'
 import QueueViewInviteWindow from '../components/ModalComponent/QueueViewInviteWindow.vue'
 import { getTimeFormat } from '../services/timeFormat'
 import { format } from 'date-fns'
