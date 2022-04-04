@@ -1,7 +1,7 @@
-import userCoupon from "./userCoupon"
-import typeCoupon from "./typeCoupon"
+import { userCoupon } from '@/types/UserCoupon'
+import { typeCoupon } from '@/types/TypeCoupon'
 
-export type State = {
+export interface State {
     typeList: typeCoupon,
     queueList: userCoupon[],
     time: Date,

@@ -11,24 +11,23 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
-import { key } from '../../store/models/queueModel'
+import { key } from '../../store/models/QueueModel'
 import { updateQueueLocalStorage } from '../../services/updateLocalStorageState'
 
 export default defineComponent({
-    
-    setup(props, { emit }) {
-        const store = useStore(key);
-        
-        const queueList = computed(() => store.getters.QUEUELIST);
-        
-        setTimeout(function() {
-            store.commit('removeCoupon');
-            updateQueueLocalStorage(queueList.value);
-            emit('close');
-        }, 5000);
-        return {
-            queueList,
-        }
+  setup (_, { emit }) {
+    const store = useStore(key)
+
+    const queueList = computed(() => store.getters.QUEUELIST)
+
+    setTimeout(function () {
+      store.commit('removeCoupon')
+      updateQueueLocalStorage(queueList.value)
+      emit('close')
+    }, 5000)
+    return {
+      queueList
     }
+  }
 })
 </script>

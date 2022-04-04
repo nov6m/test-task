@@ -1,4 +1,4 @@
-export default interface typeCoupon {
+export interface typeCoupon {
     [type: string]: number
-    //count: number
+    // count: number
 }

@@ -1,16 +1,16 @@
-import { ComputedRef } from "vue";
-import userCoupon from "@/types/userCoupon"
+import { userCoupon } from '@/types/UserCoupon'
+import { KeysLocalStorage } from '@/types/KeyLocalStorage'
 
-function updateTypeLocalStorage(value: ComputedRef<userCoupon>):void {
-    localStorage.setItem('couponType', JSON.stringify(value));
+function updateTypeLocalStorage (value: userCoupon):void {
+  localStorage.setItem(KeysLocalStorage.couponType, JSON.stringify(value))
 }
 
-function updateQueueLocalStorage(value: ComputedRef<userCoupon>): void {
-    localStorage.setItem('queueList', JSON.stringify(value));
+function updateQueueLocalStorage (value: userCoupon): void {
+  localStorage.setItem(KeysLocalStorage.queueList, JSON.stringify(value))
 }
 
-function setCityLocalStorage(city: string): void {
-    localStorage.setItem('city', JSON.stringify(city));
+function setCityLocalStorage (city: string): void {
+  localStorage.setItem(KeysLocalStorage.city, city)
 }
 
-export {updateTypeLocalStorage, updateQueueLocalStorage, setCityLocalStorage}
+export { updateTypeLocalStorage, updateQueueLocalStorage, setCityLocalStorage }
