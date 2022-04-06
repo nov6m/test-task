@@ -51,6 +51,7 @@ import { getTimeFormat } from '../services/timeFormat'
 import { format } from 'date-fns'
 import WeatherApi from '../services/getWeather'
 import { Weather } from '../types/Weater'
+import { KeysLocalStorage } from '@/types/KeyLocalStorage'
 
 export default defineComponent({
   components: {
@@ -63,7 +64,7 @@ export default defineComponent({
     const showModal = ref(false)
 
     const weather = reactive<Weather>({
-      city: localStorage.getItem('city'),
+      city: localStorage.getItem(KeysLocalStorage.city),
       lat: 0,
       lon: 0,
       infoCity: 'Погода для данного города не найдена',

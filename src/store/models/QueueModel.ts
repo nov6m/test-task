@@ -3,6 +3,7 @@ import { typeCoupon } from '@/types/TypeCoupon'
 import { userCoupon } from '@/types/UserCoupon'
 import { InjectionKey } from '@vue/runtime-core'
 import { Store } from 'vuex'
+import { KeysLocalStorage } from '@/types/KeyLocalStorage'
 
 const state: State = {
   typeList: {},
@@ -54,10 +55,10 @@ const mutations = {
     state.currentType = ''
   },
   getQueueFromStorage (state: State): void {
-    state.queueList = Object.assign(JSON.parse(localStorage.getItem('queueList') || '[]'))
+    state.queueList = Object.assign(JSON.parse(localStorage.getItem(KeysLocalStorage.queueList) || '[]'))
   },
   getTypeFromStorage (state: State): void {
-    state.typeList = Object.assign(JSON.parse(localStorage.getItem('couponType') || '[]'))
+    state.typeList = Object.assign(JSON.parse(localStorage.getItem(KeysLocalStorage.queueList) || '[]'))
   },
   incrementTypeId (state: State, payload: string):void {
     state.typeList[payload]++
@@ -73,7 +74,7 @@ const mutations = {
     for (const prop in state.typeList) {
       state.typeList[prop] = 0
     }
-    localStorage.removeItem('queueList')
+    localStorage.removeItem(KeysLocalStorage.queueList)
   }
 }
 export const key: InjectionKey<Store<State>> = Symbol('storage key')
