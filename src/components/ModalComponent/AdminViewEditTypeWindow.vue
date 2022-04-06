@@ -26,6 +26,7 @@ import { key } from '../../store/models/QueueModel'
 import { useStore } from 'vuex'
 
 export default defineComponent({
+  emits: ['close'],
   setup (_, { emit }) {
     const store = useStore(key)
 

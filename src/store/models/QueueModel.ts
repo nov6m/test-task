@@ -58,7 +58,7 @@ const mutations = {
     state.queueList = Object.assign(JSON.parse(localStorage.getItem(KeysLocalStorage.queueList) || '[]'))
   },
   getTypeFromStorage (state: State): void {
-    state.typeList = Object.assign(JSON.parse(localStorage.getItem(KeysLocalStorage.queueList) || '[]'))
+    state.typeList = Object.assign(JSON.parse(localStorage.getItem(KeysLocalStorage.couponType) || '[]'))
   },
   incrementTypeId (state: State, payload: string):void {
     state.typeList[payload]++

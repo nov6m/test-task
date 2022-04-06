@@ -27,6 +27,7 @@ import { key } from '../../store/models/QueueModel'
 import { updateTypeLocalStorage } from '../../services/updateLocalStorageState'
 
 export default defineComponent({
+  emits: ['close'],
   setup (_, { emit }) {
     const store = useStore(key)
     const newType = ref('')
